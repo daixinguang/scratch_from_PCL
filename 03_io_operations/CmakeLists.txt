@@ -1,0 +1,29 @@
+cmake_minimum_required(VERSION 3.12)
+cmake_policy(SET CMP0074 NEW)
+cmake_policy(SET CMP0167 OLD)
+
+project(pcl_io_operations)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# 依赖 io / common 模块
+find_package(PCL REQUIRED COMPONENTS
+    common
+    io
+)
+
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+# 编译目标
+add_executable(01_save_load_pcd    ${CMAKE_CURRENT_SOURCE_DIR}/01_save_load_pcd.cpp)
+add_executable(02_load_exist_pcd   ${CMAKE_CURRENT_SOURCE_DIR}/02_load_exist_pcd.cpp)
+add_executable(03_rgb_pcd_io       ${CMAKE_CURRENT_SOURCE_DIR}/03_rgb_pcd_io.cpp)
+add_executable(04_normal_pcd_io   ${CMAKE_CURRENT_SOURCE_DIR}/04_normal_pcd_io.cpp)
+
+# 链接库
+target_link_libraries(01_save_load_pcd    ${PCL_LIBRARIES})
+target_link_libraries(02_load_exist_pcd   ${PCL_LIBRARIES})
+target_link_libraries(03_rgb_pcd_io       ${PCL_LIBRARIES})
+target_link_libraries(04_normal_pcd_io   ${PCL_LIBRARIES})
